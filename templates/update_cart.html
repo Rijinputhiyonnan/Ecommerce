@@ -1,0 +1,11 @@
+
+
+{% include 'base.html' %}
+{% url 'update_cart' cart_item.id %}
+
+<form method="post" action="{% url 'update_cart' cart_item.id %}">
+    {% csrf_token %}
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" value="{{ cart_item.quantity }}" min="1">
+    <input type="submit" value="Update">
+</form>

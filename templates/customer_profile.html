@@ -1,0 +1,54 @@
+
+{% include 'base.html' %}
+<!-- customer_profile.html -->
+<h1>Customer Profile</h1>
+
+<form id="customer-form" method="post" action="{% url 'customer_update' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_first_name">First Name:</label>
+        <input type="text" name="first_name" value="{{ customer.user.first_name }}" class="form-control" id="id_first_name" readonly>
+    </div>
+    <div class="form-group">
+        <label for="id_last_name">Last Name:</label>
+        <input type="text" name="last_name" value="{{ customer.user.last_name }}" class="form-control" id="id_last_name" readonly>
+    </div>
+    <div class="form-group">
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" value="{{ customer.user.email }}" class="form-control" id="id_email" readonly>
+    </div>
+    <div class="form-group">
+        <label for="id_phone">Phone:</label>
+        <input type="tel" name="phone" value="{{ customer.phone }}" class="form-control" id="id_phone" readonly>
+    </div>
+
+    <button type="button" id="edit-button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+    <button type="submit" id="save-button" class="btn btn-success d-none"><i class="fas fa-save"></i> Save</button>
+    <button type="button" id="cancel-button" class="btn btn-secondary d-none"><i class="fas fa-times"></i> Cancel</button>
+</form>
+
+<form method="post" action="{% url 'customer_profile_delete' pk=customer.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger mt-3"><i class="fas fa-trash-alt"></i> Delete</button>
+</form>
+
+<script>
+    const form = document.querySelector('#customer-form');
+    const editButton = document.querySelector('#edit-button');
+    const saveButton = document.querySelector('#save-button');
+    const cancelButton = document.querySelector('#cancel-button');
+
+    editButton.addEventListener('click', () => {
+        form.querySelectorAll('input').forEach(input => input.readOnly = false);
+        editButton.classList.add('d-none');
+        saveButton.classList.remove('d-none');
+        cancelButton.classList.remove('d-none');
+    });
+
+    cancelButton.addEventListener('click', () => {
+        form.querySelectorAll('input').forEach(input => input.readOnly = true);
+        editButton.classList.remove('d-none');
+        saveButton.classList.add('d-none');
+        cancelButton.classList.add('d-none');
+    });
+</script>

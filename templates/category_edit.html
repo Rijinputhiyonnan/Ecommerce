@@ -1,0 +1,20 @@
+
+{% include 'base.html' %}
+<style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    form input[type="submit"] {
+      margin-top: 10px;
+    }
+  </style>
+<!-- category_edit.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+  

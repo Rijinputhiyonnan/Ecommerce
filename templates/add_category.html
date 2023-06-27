@@ -1,0 +1,12 @@
+
+{% include 'base.html' %}
+{% load widget_tweaks %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.name.label_tag }}
+      {{ form.name }}
+    </div>
+    <input type="submit" value="Add Category" class="btn btn-primary">
+  </form>
